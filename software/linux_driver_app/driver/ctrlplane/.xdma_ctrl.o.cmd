@@ -1,0 +1,1 @@
+cmd_/home/xhdpssa/Package/GUI/kcu105_control_plane/software/linux_driver_app/driver/ctrlplane/xdma_ctrl.o := ld -m elf_x86_64   -r -o /home/xhdpssa/Package/GUI/kcu105_control_plane/software/linux_driver_app/driver/ctrlplane/xdma_ctrl.o /home/xhdpssa/Package/GUI/kcu105_control_plane/software/linux_driver_app/driver/ctrlplane/xpcie.o 
