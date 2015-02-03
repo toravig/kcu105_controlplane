@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/xhdpssa/Package/GUI/kcu105_control_plane/software/linux_driver_app/gui/src/UltraScaleGUI/src/com/xilinx/ultrascale/gui/PowerChart.java</file>
-            <file>file:/home/xhdpssa/Package/GUI/kcu105_control_plane/software/linux_driver_app/gui/src/UltraScaleGUI/src/com/xilinx/ultrascale/gui/MainScreen.java</file>
-            <file>file:/home/xhdpssa/Package/GUI/kcu105_control_plane/software/linux_driver_app/gui/src/UltraScaleGUI/src/com/xilinx/ultrascale/jni/PCIState.java</file>
-            <file>file:/home/xhdpssa/Package/GUI/kcu105_control_plane/software/linux_driver_app/gui/src/UltraScaleGUI/src/com/xilinx/ultrascale/jni/EndPointInfo.java</file>
+            <file>file:/home/xhdpssa/Downloads/Anil/kcu105_controlplane-master/software/linux_driver_app/gui/src/UltraScaleGUI/src/com/xilinx/ultrascale/gui/LandingPage.java</file>
+            <file>file:/home/xhdpssa/Downloads/Anil/kcu105_controlplane-master/software/linux_driver_app/gui/src/UltraScaleGUI/src/com/xilinx/ultrascale/gui/RmiManager.java</file>
         </group>
     </open-files>
 </project-private>

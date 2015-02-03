@@ -496,6 +496,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
@@ -525,7 +526,7 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="DeviceStatusPanel" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -546,9 +547,9 @@
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="65" max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
                   <Component id="DeviceStatusPanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="231" max="32767" attributes="0"/>
+                  <EmptySpace pref="247" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -611,8 +612,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel2" min="-2" pref="19" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel3" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="jLabel3" pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -646,13 +646,13 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
                   <Component id="acceleratorRadioButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   <Component id="EthernetRadioButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="46" max="32767" attributes="0"/>
                   <Component id="ControlPlaneRadioButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -703,9 +703,7 @@
     <Container class="javax.swing.JPanel" name="ControlMainPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-            <EtchetBorder/>
-          </Border>
+          <Border info="null"/>
         </Property>
       </Properties>
 
@@ -717,7 +715,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="143" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="147" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

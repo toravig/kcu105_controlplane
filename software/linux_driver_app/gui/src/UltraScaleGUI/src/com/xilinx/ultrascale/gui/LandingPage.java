@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.Dialog.ModalityType;
 import java.awt.*;
+import java.nio.channels.AlreadyBoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -472,8 +475,7 @@ public class LandingPage extends javax.swing.JFrame {
             .addGroup(DeviceStatusPanelLayout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(16, 16, 16))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
         );
 
         SelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Design Selection"));
@@ -507,13 +509,13 @@ public class LandingPage extends javax.swing.JFrame {
         SelectionPanelLayout.setHorizontalGroup(
             SelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SelectionPanelLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(acceleratorRadioButton)
                 .addGap(44, 44, 44)
                 .addComponent(EthernetRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(ControlPlaneRadioButton)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         SelectionPanelLayout.setVerticalGroup(
             SelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,7 +528,7 @@ public class LandingPage extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ControlMainPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ControlMainPanel.setBorder(null);
 
         javax.swing.GroupLayout ControlMainPanelLayout = new javax.swing.GroupLayout(ControlMainPanel);
         ControlMainPanel.setLayout(ControlMainPanelLayout);
@@ -536,7 +538,7 @@ public class LandingPage extends javax.swing.JFrame {
         );
         ControlMainPanelLayout.setVerticalGroup(
             ControlMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 143, Short.MAX_VALUE)
+            .addGap(0, 147, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -551,7 +553,7 @@ public class LandingPage extends javax.swing.JFrame {
                     .addComponent(HeaderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(DeviceStatusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
@@ -568,9 +570,9 @@ public class LandingPage extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(65, Short.MAX_VALUE)
+                    .addContainerGap(58, Short.MAX_VALUE)
                     .addComponent(DeviceStatusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(231, Short.MAX_VALUE)))
+                    .addContainerGap(247, Short.MAX_VALUE)))
         );
 
         pack();
@@ -779,6 +781,26 @@ public class LandingPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                // checking for another instance of gui
+                 RmiManager rmiManager = new RmiManager();
+                rmiManager.createRmiRegistry();
+
+                if (rmiManager.isAlreadyRunning()) {
+                    Object[] options1 = {"Ok"};
+                    int s = JOptionPane.showOptionDialog(null, "Another instance of GUI is running.", " ",
+                            JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE,
+                            null, options1, null);                    System.exit(0);
+                    return;
+                }
+
+                try {
+                    rmiManager.registerApplication();
+                } catch (AlreadyBoundException ex) {
+                } catch (java.rmi.AlreadyBoundException ex) {
+                    Logger.getLogger(LandingPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                // create an instance
                 lander = new LandingPage();
                 lander.setVisible(true);
                 lander.setSizesOfDynamicPanels();
@@ -792,9 +814,9 @@ public class LandingPage extends javax.swing.JFrame {
     }
 
     public void setSizesOfDynamicPanels() {
-        EthernetPanel.setSize(ControlMainPanel.getSize());
-        PCIeBasedAccPanel.setSize(ControlMainPanel.getSize());
-        ControlPlanePanel.setSize(ControlMainPanel.getSize());
+        EthernetPanel.setSize(ControlMainPanel.getSize().width - 10 , ControlMainPanel.getSize().height);
+        PCIeBasedAccPanel.setSize(ControlMainPanel.getSize().width - 10 , ControlMainPanel.getSize().height);
+        ControlPlanePanel.setSize(ControlMainPanel.getSize().width - 10 , ControlMainPanel.getSize().height);
 
     }
 

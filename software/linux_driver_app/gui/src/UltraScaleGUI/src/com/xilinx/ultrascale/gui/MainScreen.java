@@ -214,7 +214,7 @@ public class MainScreen extends javax.swing.JFrame {
 //                PcieEndStatuspanel.repaint();
 //                 PcieEndStatuspanel.revalidate();
                 //TabelModel.getColoum(1).setsize();
-                PowerPanel.setPreferredSize(new Dimension(310, 445));
+                PowerPanel.setPreferredSize(new Dimension(330, 445));
                 PowerPanel.revalidate();
                 PowerPanel.repaint();
                 /*MyTableModel tblModel = new MyTableModel(dummydata, pcieEndptClm);
@@ -342,15 +342,16 @@ public class MainScreen extends javax.swing.JFrame {
         tabpanel = new javax.swing.JPanel();
         tabbedPanel = new javax.swing.JTabbedPane();
         sysmonpanel = new javax.swing.JPanel();
+        PowerPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         tempholdPanel = new javax.swing.JPanel();
         tempvaluePanel = new javax.swing.JPanel();
         TempMeasureLabel = new javax.swing.JLabel();
         MinorTempLabel = new javax.swing.JLabel();
         MajorTempLabel = new javax.swing.JLabel();
+        MajorTempLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        PowerPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         PerformancePlotTab = new javax.swing.JPanel();
         topChartperfpanel = new javax.swing.JPanel();
         bottomChartperfpanel = new javax.swing.JPanel();
@@ -1268,59 +1269,6 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tempvaluePanel.setBackground(java.awt.Color.black);
-        tempvaluePanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        tempvaluePanel.setToolTipText("Temp");
-
-        TempMeasureLabel.setBackground(java.awt.Color.black);
-
-        javax.swing.GroupLayout tempvaluePanelLayout = new javax.swing.GroupLayout(tempvaluePanel);
-        tempvaluePanel.setLayout(tempvaluePanelLayout);
-        tempvaluePanelLayout.setHorizontalGroup(
-            tempvaluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempvaluePanelLayout.createSequentialGroup()
-                .addComponent(MajorTempLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(MinorTempLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(TempMeasureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-        tempvaluePanelLayout.setVerticalGroup(
-            tempvaluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempvaluePanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(tempvaluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MinorTempLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TempMeasureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MajorTempLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Die Temp :");
-
-        javax.swing.GroupLayout tempholdPanelLayout = new javax.swing.GroupLayout(tempholdPanel);
-        tempholdPanel.setLayout(tempholdPanelLayout);
-        tempholdPanelLayout.setHorizontalGroup(
-            tempholdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempholdPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(tempvaluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-        tempholdPanelLayout.setVerticalGroup(
-            tempholdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempholdPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(tempvaluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempholdPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         PowerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         javax.swing.GroupLayout PowerPanelLayout = new javax.swing.GroupLayout(PowerPanel);
@@ -1356,6 +1304,60 @@ public class MainScreen extends javax.swing.JFrame {
             .addGap(0, 16, Short.MAX_VALUE)
         );
 
+        tempvaluePanel.setBackground(java.awt.Color.black);
+        tempvaluePanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tempvaluePanel.setToolTipText("Temp");
+
+        TempMeasureLabel.setBackground(java.awt.Color.black);
+
+        javax.swing.GroupLayout tempvaluePanelLayout = new javax.swing.GroupLayout(tempvaluePanel);
+        tempvaluePanel.setLayout(tempvaluePanelLayout);
+        tempvaluePanelLayout.setHorizontalGroup(
+            tempvaluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempvaluePanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(MajorTempLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(MajorTempLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(MinorTempLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(TempMeasureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+        tempvaluePanelLayout.setVerticalGroup(
+            tempvaluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempvaluePanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(tempvaluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(MinorTempLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(TempMeasureLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(MajorTempLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(MajorTempLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Die Temperature :");
+
+        javax.swing.GroupLayout tempholdPanelLayout = new javax.swing.GroupLayout(tempholdPanel);
+        tempholdPanel.setLayout(tempholdPanelLayout);
+        tempholdPanelLayout.setHorizontalGroup(
+            tempholdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempholdPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(tempvaluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        tempholdPanelLayout.setVerticalGroup(
+            tempholdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tempholdPanelLayout.createSequentialGroup()
+                .addGap(0, 4, Short.MAX_VALUE)
+                .addGroup(tempholdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tempvaluePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
         javax.swing.GroupLayout sysmonpanelLayout = new javax.swing.GroupLayout(sysmonpanel);
         sysmonpanel.setLayout(sysmonpanelLayout);
         sysmonpanelLayout.setHorizontalGroup(
@@ -1365,27 +1367,24 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(sysmonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(sysmonpanelLayout.createSequentialGroup()
-                        .addGroup(sysmonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PowerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sysmonpanelLayout.createSequentialGroup()
-                        .addComponent(tempholdPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))))
+                    .addComponent(PowerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sysmonpanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tempholdPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         sysmonpanelLayout.setVerticalGroup(
             sysmonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sysmonpanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(sysmonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sysmonpanelLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
                         .addComponent(tempholdPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(PowerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(sysmonpanelLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(388, 388, 388)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -2096,24 +2095,23 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     public void updatePowerAndTemp() {
-        if (Develop.production == 1) {
+        
             int ret = di.get_PowerStats();
 
             PowerStats ps = di.getPowerStats();
 
-            MajorTempLabel.setIcon(ledicons[ps.die_temp / 10]);
-            MinorTempLabel.setIcon(ledicons[ps.die_temp % 10]);
+            MajorTempLabel3.setIcon(ledicons[ps.die_temp / 100]);
+            int tempVal = ps.die_temp;
+            if (ps.die_temp >= 100) {
+                tempVal -= 100;
+            }
+            MajorTempLabel.setIcon(ledicons[tempVal / 10]);
+            MinorTempLabel.setIcon(ledicons[tempVal % 10]);
             TempMeasureLabel.setText("" + "°C");
 
             chart1.updateChart((double) ps.vccint / 1000.0, 
                     (double) ps.mgtvcc / 1000.0,(double) ps.vccaux / 1000.0, (double) ps.vccbram / 1000.0);
-        } else { // dummy values
-            MajorTempLabel.setIcon(ledicons[32 / 10]);
-            MinorTempLabel.setIcon(ledicons[32 % 10]);
-            TempMeasureLabel.setText("" + "°C");
-
-            chart1.updateChart((double) 1, (double) 2, (double) 1.5, (double) 2.5);
-        }
+        
     }
     static MainScreen ms;
     DriverInfo di;
@@ -2221,6 +2219,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JCheckBox GeneratorCheckbox;
     private javax.swing.JPanel HeadingPanel;
     private javax.swing.JLabel MajorTempLabel;
+    private javax.swing.JLabel MajorTempLabel3;
     private javax.swing.JLabel MinorTempLabel;
     private javax.swing.JPanel PcieEndStatuspanel;
     private javax.swing.JPanel PerformancePlotTab;
