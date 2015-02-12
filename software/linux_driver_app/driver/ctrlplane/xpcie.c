@@ -124,9 +124,9 @@ struct privData {
 	 */
 	u32 barMask;                    /**< Bitmask for BAR information */
 	struct {
-		unsigned long basePAddr;
-		unsigned long baseLen;
-		void __iomem *baseVAddr;
+		unsigned long basePAddr;/**< Physical Address of BAR */
+		unsigned long baseLen;  /**< BAR length */
+		void __iomem *baseVAddr;/**< Virtual address of BAR */
 	} barInfo[MAX_BARS];
 
 };
@@ -149,10 +149,6 @@ static int ReadPCIState(struct pci_dev * pdev, PCIState * pcistate)
 	u16 valw;
 	u8 valb;
 	int reg=0,linkUpCap=0;
-#if defined(K7_TRD)
-	u64 base;
-	base = (unsigned long)(dmaData->barInfo[0].baseVAddr);
-#endif
 
 	/* Since probe has succeeded, indicates that link is up. */
 	pcistate->LinkState = LINK_UP;
@@ -181,7 +177,6 @@ static int ReadPCIState(struct pci_dev * pdev, PCIState * pcistate)
 		pci_read_config_word(pdev, pos+PCI_EXP_LNKSTA, &valw);
 		pcistate->LinkSpeed = (valw & 0x0003);
 		pcistate->LinkWidth = (valw & 0x03f0) >> 4;
-		//	reg=XIo_In32(base+PCIE_CAP_REG);
 		linkUpCap= (reg>>4) & 0x1;
 		pcistate->LinkUpCap = linkUpCap;
 
@@ -419,6 +414,9 @@ static long xdma_dev_ioctl(struct file * filp,
 
 
 /********************************************************************/
+/*
+ * Poll function for polling PVTMON,DMA and PCIe Stats
+ */
 static void poll_stats(unsigned long __opaque)
 {
 	struct pci_dev *pdev = (struct pci_dev *)__opaque;
@@ -572,7 +570,7 @@ static int /*__devinit */ xpcie_probe(struct pci_dev *pdev, const struct pci_dev
 
 	ReadConfig(pdev);
 	//- Bridge initialization	
-	InitBridge(dmaData->barInfo[0].baseVAddr, dmaData->barInfo[0].basePAddr, dmaData->barInfo[2].baseVAddr, dmaData->barInfo[2].basePAddr, dmaData->barInfo[4].basePAddr);
+	InitBridge((u64)dmaData->barInfo[0].baseVAddr, dmaData->barInfo[0].basePAddr,(u64) dmaData->barInfo[2].baseVAddr, dmaData->barInfo[2].basePAddr, dmaData->barInfo[4].basePAddr);
 
 	//- Scratchpad in PVTMON
 	printk("Data at BAR[2] %p offset (0x04) = %x\n",dmaData->barInfo[2].baseVAddr, XIo_In32(dmaData->barInfo[2].baseVAddr + 0x04));

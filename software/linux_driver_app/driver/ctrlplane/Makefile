@@ -11,8 +11,7 @@ all:
 	$(MAKE) $(CFLAGS) -C $(KDIR) SUBDIRS=$(PWD)/ctrlplane
 	
 clean: 
-	   rm -rf *.o *.ko *.mod.* .c* .t* 
-
+	rm -rf *.o *.ko *.mod.* .c* .t*  .*.cmd modules.order Module.symvers
 # LOGGING: ---------------------------------------------------------------
 # Add to EXTRA_CFLAGS, based on the logging level desired:
 # -DDEBUG_NORMAL: To enable normal logging levels 
