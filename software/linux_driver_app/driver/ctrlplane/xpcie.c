@@ -1,3 +1,31 @@
+/****************************************************************************
+ ****************************************************************************/
+/** Copyright (C) 2014-2015 Xilinx, Inc.  All rights reserved.
+ ** Permission is hereby granted, free of charge, to any person obtaining
+ ** a copy of this software and associated documentation files (the
+ ** "Software"), to deal in the Software without restriction, including
+ ** without limitation the rights to use, copy, modify, merge, publish,
+ ** distribute, sublicense, and/or sell copies of the Software, and to
+ ** permit persons to whom the Software is furnished to do so, subject to
+ ** the following conditions:
+ ** The above copyright notice and this permission notice shall be included
+ ** in all copies or substantial portions of the Software.Use of the Software 
+ ** is limited solely to applications: (a) running on a Xilinx device, or 
+ ** (b) that interact with a Xilinx device through a bus or interconnect.  
+ ** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ ** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ ** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ ** NONINFRINGEMENT. IN NO EVENT SHALL THE X CONSORTIUM BE LIABLE FOR ANY
+ ** CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ ** TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ ** SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ** Except as contained in this notice, the name of the Xilinx shall
+ ** not be used in advertising or otherwise to promote the sale, use or other
+ ** dealings in this Software without prior written authorization from Xilinx
+ **/
+/*****************************************************************************
+*****************************************************************************/
+
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/pci.h>
@@ -6,10 +34,7 @@
 #include <asm/uaccess.h>
 #include <linux/version.h>
 #include <linux/fs.h>
-
 #include <linux/spinlock.h>
-
-
 
 #include <xpmon_be.h>
 #include <xbasic_types.h>
@@ -33,7 +58,7 @@
 #define MAX_BARS    6
 
 
-/** PVTMON Macros */
+/** PVTMON Macros [Voltage and temperature monitoring registers]*/
 
 #define		PVTMON_VCCINT 			0x040
 #define 	PVTMON_VCCAUX 			0x044
@@ -252,16 +277,14 @@ xdma_dev_write (struct file *file,
 		const char __user * buffer, size_t length, loff_t * offset)
 {
 
-	int ret_pack=0;
 	writedata wdata;
 	u64 base;
+	
 	if(copy_from_user(&wdata, (writedata *)buffer, sizeof(writedata)))
 	{
 		printk("copy_from_user failed\n");
+		return -1;
 	}
-
-
-
 	if( wdata.bar == 2)
 	{
 		base = (unsigned long)(dmaData->barInfo[2].baseVAddr);
@@ -270,17 +293,15 @@ xdma_dev_write (struct file *file,
 	{
 		base = (unsigned long)(dmaData->barInfo[4].baseVAddr);
 	}
-
-
+	else
+	{
+		printk(KERN_ERR"Un-used BAR %d \n",wdata.bar);
+		return -1;
+	}
 	XIo_Out32(base + wdata.offset , *(wdata.bufferAddress ));	
 
-
-
-
-
 	log_normal("Dma write Came with %d bar %x Address   %d offset %d length %x data \n", wdata.bar,wdata.bufferAddress,wdata.offset,wdata.size,*((u32 *)wdata.bufferAddress));                   
-
-	return ret_pack;
+	return (wdata.size);
 }
 
 
@@ -288,7 +309,6 @@ xdma_dev_write (struct file *file,
 xdma_dev_read (struct file *file,
 		char __user * buffer, size_t length, loff_t * offset)
 {
-	int ret_pack=0;
 	readdata rdata;
 	int i=0;
 	u32  * kbuffer;
@@ -299,10 +319,9 @@ xdma_dev_read (struct file *file,
 	if(copy_from_user(&rdata, (readdata *)buffer, sizeof(readdata)))
 	{
 		printk("copy_from_user failed\n");
+		return -1;
 	}
 	kbuffer= kmalloc( rdata.size,GFP_KERNEL);
-	//     for(i=0; i< rdata.size;i++)
-	//	*( kbuffer + i)= 0x11;	
 	tempbuff=kbuffer;
 
 	if( rdata.bar == 2)
@@ -313,16 +332,18 @@ xdma_dev_read (struct file *file,
 	{
 		base = (unsigned long)(dmaData->barInfo[4].baseVAddr);	
 	}
-
+	else
+	{
+		printk("Un-used BAR %d",rdata.bar);
+		return -1;
+	}
 
 	for (i=0; i < ( rdata.size ) ; i=i+4)
 	{
 		*(tempbuff)=XIo_In32(base +( rdata.offset )+ i);
-		printk("# %x #\n",*(tempbuff));
+		log_normal(" %x \n",*(tempbuff));
 		tempbuff++;
 	}
-
-
 
 	/* 
 	 *  return the number of bytes sent , currently one or none
@@ -334,10 +355,10 @@ xdma_dev_read (struct file *file,
 
 	if(copy_to_user( rdata.bufferAddress,kbuffer,rdata.size))
 	{
-		printk("copy_from_user failed\n");
+		printk("copy_to_user failed\n");
 	}
-
-	return ret_pack;
+	kfree(kbuffer);
+	return (rdata.size);
 }
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,36)
@@ -349,8 +370,6 @@ static long xdma_dev_ioctl(struct file * filp,
 #endif
 {
 	int retval=0;
-
-
 	PCIState pcistate;
 	PowerMonitorVal pmval_temp;
 	EndpointInfo End_Bar;
@@ -405,8 +424,8 @@ static long xdma_dev_ioctl(struct file * filp,
 
 		default:
 			printk("Invalid command %d \n", cmd);
-			retval = -1;
-			break;
+			return -ENOTTY;
+	//		break;
 	}
 
 	return retval;
@@ -472,8 +491,7 @@ static int /*__devinit */ xpcie_probe(struct pci_dev *pdev, const struct pci_dev
 		printk(KERN_ERR "PCI device enable failed.\n");
 		return pciRet;
 	}
-
-
+	spin_lock_init(&DmaStatsLock);
 
 	dmaData = kmalloc(sizeof(struct privData), GFP_KERNEL);
 	if(dmaData == NULL)
@@ -594,7 +612,7 @@ static int /*__devinit */ xpcie_probe(struct pci_dev *pdev, const struct pci_dev
 	 */
 	/* First allocate a major/minor number. */
 	chrRet = alloc_chrdev_region(&xdmaDev, 0, 1, "xdma_ctrl");
-	if(IS_ERR((int *)chrRet))
+	if( chrRet < 0 )
 		printk(KERN_ERR "Error allocating char device region\n");
 	else
 	{
@@ -637,7 +655,7 @@ static int /*__devinit */ xpcie_probe(struct pci_dev *pdev, const struct pci_dev
 	stats_timer.function = poll_stats;
 	add_timer(&stats_timer);
 
-	printk("End of Probe");
+	printk("Xpcie probe driver completed");
 	return 0;
 }
 
@@ -759,12 +777,15 @@ static void /* __devexit */ xpcie_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 	pci_set_drvdata(pdev, NULL);
+	if(dmaData != NULL)
+	{
+		kfree(dmaData);
+	}
 }
 
 static int __init xpcie_init(void)
 {
 	/* Register driver */
-	spin_lock_init(&DmaStatsLock);
 	printk("XPCIe: Inserting Xilinx PCIe driver in kernel.\n");
 	return pci_register_driver(&xpcie_driver);
 }
@@ -773,13 +794,6 @@ static void __exit xpcie_cleanup(void)
 {
 	/* Then, unregister driver with PCI in order to free up resources */
 	pci_unregister_driver(&xpcie_driver);
-	if(dmaData != NULL)
-	{
-		printk("GUI user open? %d\n", UserOpen);
-		kfree(dmaData);
-	}
-	else
-		printk("DriverState still running \n");
 	printk("XPCIe: Removing Xilinx PCIe driver from kernel.\n");
 }
 
