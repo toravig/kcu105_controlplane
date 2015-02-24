@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.Dialog.ModalityType;
 import java.awt.*;
-import java.nio.channels.AlreadyBoundException;
+import java.rmi.AlreadyBoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /*
@@ -796,9 +796,8 @@ public class LandingPage extends javax.swing.JFrame {
                 try {
                     rmiManager.registerApplication();
                 } catch (AlreadyBoundException ex) {
-                } catch (java.rmi.AlreadyBoundException ex) {
-                    Logger.getLogger(LandingPage.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    ex.printStackTrace();
+                } 
                 
                 // create an instance
                 lander = new LandingPage();
