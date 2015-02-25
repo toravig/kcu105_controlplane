@@ -127,7 +127,7 @@ public class PCIState{
    
     public Object[][] getPCIData(){
         String lst = "Up";
-        String lsp = "2.5 Gbps";
+        String lsp = "2.5 GT/s";
         String vid = "";
         String did = "";
         String intp = "";
@@ -137,11 +137,11 @@ public class PCIState{
         else
             lst = "Down";
         if (LinkSpeed == 1)
-            lsp = "2.5 Gbps";
+            lsp = "2.5 GT/s";
         else if(LinkSpeed == 2)
-            lsp = "5 Gbps";
+            lsp = "5 GT/s";
         else if (LinkSpeed == 4)
-            lsp = "8 Gbps";
+            lsp = "8 GT/s";
         else
             lsp = "Unknown";
         if (IntMode == 0)
@@ -191,7 +191,7 @@ public class PCIState{
     }
         public Object[][] getPCIDataForCP(){
         String lst = "Up";
-        String lsp = "2.5 Gbps";
+        String lsp = "2.5 GT/s";
         String vid = "";
         String did = "";
         String intp = "";
@@ -201,11 +201,11 @@ public class PCIState{
         else
             lst = "Down";
         if (LinkSpeed == 1)
-            lsp = "2.5 Gbps";
+            lsp = "2.5 GT/s";
         else if(LinkSpeed == 2)
-            lsp = "5 Gbps";
+            lsp = "5 GT/s";
         else if (LinkSpeed == 4)
-            lsp = "8 Gbps";
+            lsp = "8 GT/s";
         else
             lsp = "Unknown";
         if (IntMode == 0)

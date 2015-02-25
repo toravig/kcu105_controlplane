@@ -1766,6 +1766,11 @@ public class MainScreen extends javax.swing.JFrame {
         }
         String data = dataTextfield.getText();
         data = data.replaceAll("0x", "");
+        if (data.length() > 8){
+            JOptionPane.showMessageDialog(this, "Data is greater than DWORD");
+            dataTextfield.setText("0x");
+            return;
+        }
         long dataInt = 0;
         try {
             dataInt = Long.parseLong(data, 16);
@@ -1775,6 +1780,7 @@ public class MainScreen extends javax.swing.JFrame {
              }*/
         } catch (Exception e) {// alert for invalid chars
             JOptionPane.showMessageDialog(this, "Data range is 0x0 - 0xFFFFFFFF");
+             dataTextfield.setText("0x");
             return;
         }
         di.writeCmd(ms, bar, offset, dataInt);
